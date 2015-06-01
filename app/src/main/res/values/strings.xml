@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">WalkingTweet</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="tvx">tvx</string>
+    <string name="tvy">tvy</string>
+    <string name="tvz">tvz</string>
+    <string name="stepcnt">stepcnt</string>
+    <string name="perminstepcnt">perminstepcnt</string>
+
+
+    <string name="stepcntlabel">今の歩数</string>
+    <string name="perminstepcntlabel">1分間の歩数</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

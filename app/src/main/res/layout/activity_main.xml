@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".MainActivity">
+
+    <TextView
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvx"
+        android:id="@+id/Xdata"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginTop="194dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvy"
+        android:id="@+id/Ydata"
+        android:layout_below="@+id/Xdata"
+        android:layout_alignLeft="@+id/Xdata"
+        android:layout_alignStart="@+id/Xdata"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvz"
+        android:id="@+id/Zdata"
+        android:layout_below="@+id/Ydata"
+        android:layout_alignLeft="@+id/Ydata"
+        android:layout_alignStart="@+id/Ydata"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stepcntlabel"
+        android:id="@+id/stepcntlabel"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/Xdata"
+        android:layout_alignEnd="@+id/Xdata"
+        android:layout_marginTop="89dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stepcnt"
+        android:id="@+id/stepcnt"
+        android:layout_alignTop="@+id/stepcntlabel"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Zdata"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="1">
+
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="91dp"
+            class="com.walkingtweet.kichi.walkingtweet.GraphView"
+            android:id="@+id/graphViewX"/>
+
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            class="com.walkingtweet.kichi.walkingtweet.GraphView"
+            android:id="@+id/graphViewY"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.30"
+            android:focusableInTouchMode="false"/>
+
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            class="com.walkingtweet.kichi.walkingtweet.GraphView"
+            android:id="@+id/graphViewZ"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.24"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perminstepcntlabel"
+        android:id="@+id/perminstepcntlabel"
+        android:layout_below="@+id/stepcntlabel"
+        android:layout_alignLeft="@+id/stepcntlabel"
+        android:layout_alignStart="@+id/stepcntlabel"
+        android:layout_marginTop="27dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perminstepcnt"
+        android:id="@+id/perminstepcnt"
+        android:layout_alignTop="@+id/perminstepcntlabel"
+        android:layout_alignLeft="@+id/stepcnt"
+        android:layout_alignStart="@+id/stepcnt"/>
+
+</RelativeLayout>
