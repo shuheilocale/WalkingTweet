@@ -14,4 +14,5 @@
     <string name="perminstepcntlabel">1分間の歩数</string>
 
     <string name="action_settings">Settings</string>
+    <string name="tweet_button">ツイートする</string>
 </resources>

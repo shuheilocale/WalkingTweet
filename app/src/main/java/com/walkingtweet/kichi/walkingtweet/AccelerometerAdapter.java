@@ -14,29 +14,29 @@ public class AccelerometerAdapter implements SensorEventListener {
     long changeTime = 0;
     double vectorSize = 0;
 
-    // d•¡ƒJƒEƒ“ƒg–h~—pƒtƒ‰ƒO
+    // é‡è¤‡ã‚«ã‚¦ãƒ³ãƒˆé˜²æ­¢ç”¨ãƒ•ãƒ©ã‚°
     boolean counted = true;
 
-    // •à”ƒJƒEƒ“ƒ^[
+    // æ­©æ•°ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
     long step_counter = 0;
 
-    // ‚P‚Â‘O‚ÌƒxƒNƒgƒ‹—Ê
+    // ï¼‘ã¤å‰ã®ãƒ™ã‚¯ãƒˆãƒ«é‡
     double oldVectorSize = 0;
 
-    // è‡’l
+    // é–¾å€¤
     double threshold = 15;
-    // ²•ûŒü“]Š·‚ÌÅ¬è‡’l
+    // è»¸æ–¹å‘è»¢æ›ã®æœ€å°é–¾å€¤
     double thresholdMin = 1;
-    // ƒxƒNƒgƒ‹•Ï‰»ŒŸo‚µ‚È‚¢ŠÔ‚Ìè‡’l
+    // ãƒ™ã‚¯ãƒˆãƒ«å¤‰åŒ–æ¤œå‡ºã—ãªã„æ™‚é–“ã®é–¾å€¤
     long thresholdTime = 190;
 
-    // X²‰Á‘¬•ûŒü
+    // Xè»¸åŠ é€Ÿæ–¹å‘
     boolean vecx = true;
-    // Y²‰Á‘¬•ûŒü
+    // Yè»¸åŠ é€Ÿæ–¹å‘
     boolean vecy = true;
-    // Z²‰Á‘¬•ûŒü
+    // Zè»¸åŠ é€Ÿæ–¹å‘
     boolean vecz = true;
-    // ‰Á‘¬“x•ûŒü‚Ì“]Š·‰ñ”
+    // åŠ é€Ÿåº¦æ–¹å‘ã®è»¢æ›å›æ•°
     int vecchangecount = 0;
 
 
@@ -102,15 +102,15 @@ public class AccelerometerAdapter implements SensorEventListener {
             dy = event.values[1] - oldy;
             dz = event.values[2] - oldz;
 
-            // ƒxƒNƒgƒ‹—Ê‚ğƒsƒ^ƒSƒ‰ƒX‚Ì’è‹`‚©‚ç‹‚ß‚éB
-            // ‚ª³Šm‚È’l‚Í•K—v‚Å‚È‚­AÁ”ï“d—Í‚©‚ç•½•ûª‚Ü‚Å‹‚ß‚é•K—v‚Í‚È‚¢
+            // ãƒ™ã‚¯ãƒˆãƒ«é‡ã‚’ãƒ”ã‚¿ã‚´ãƒ©ã‚¹ã®å®šç¾©ã‹ã‚‰æ±‚ã‚ã‚‹ã€‚
+            // ãŒæ­£ç¢ºãªå€¤ã¯å¿…è¦ã§ãªãã€æ¶ˆè²»é›»åŠ›ã‹ã‚‰å¹³æ–¹æ ¹ã¾ã§æ±‚ã‚ã‚‹å¿…è¦ã¯ãªã„
             // vectorSize = Math.sqrt((double)(dx*dx+dy*dy+dz*dz));
             vectorSize = (double) (dx * dx + dy * dy + dz * dz);
-            // ƒxƒNƒgƒ‹ŒvZ‚ğŒµ–§‚És‚¤‚ÆŒvZ—Ê‚ªã‚ª‚é‚½‚ßAŠÈˆÕ“I‚È•ûŒü‚ğ‹‚ß‚éB
-            // ˆê’è—Ê‚ÌƒxƒNƒgƒ‹—Ê‚ª‚ ‚èŒü‚«‚Ì”½“]‚ª‚ ‚Á‚½ê‡i‘½•ª‘–‚Á‚½ê‡j
-            // vecchangecount‚ÍSENSOR_DELAY_NORMAL‚Ìê‡A200ms¸“x‚æ‚è
-            // ‰Á‘¬“x•Ï‰»‚ªŒŸo‚Å‚«‚È‚¢‚½‚ß‚Ìê—pˆ—B¸“x‚ğã‚°‚é‚Æ•s—v
-            // ‚³‚ç‚É¸“x‚ª‚í‚é‚¢‚±‚Æ‚©‚çA˜A‘±‚ÌƒxƒNƒgƒ‹•Ï‰»‚ÍŒŸ’m‚µ‚È‚¢B
+            // ãƒ™ã‚¯ãƒˆãƒ«è¨ˆç®—ã‚’å³å¯†ã«è¡Œã†ã¨è¨ˆç®—é‡ãŒä¸ŠãŒã‚‹ãŸã‚ã€ç°¡æ˜“çš„ãªæ–¹å‘ã‚’æ±‚ã‚ã‚‹ã€‚
+            // ä¸€å®šé‡ã®ãƒ™ã‚¯ãƒˆãƒ«é‡ãŒã‚ã‚Šå‘ãã®åè»¢ãŒã‚ã£ãŸå ´åˆï¼ˆå¤šåˆ†èµ°ã£ãŸå ´åˆï¼‰
+            // vecchangecountã¯SENSOR_DELAY_NORMALã®å ´åˆã€200msç²¾åº¦ã‚ˆã‚Š
+            // åŠ é€Ÿåº¦å¤‰åŒ–ãŒæ¤œå‡ºã§ããªã„ãŸã‚ã®å°‚ç”¨å‡¦ç†ã€‚ç²¾åº¦ã‚’ä¸Šã’ã‚‹ã¨ä¸è¦
+            // ã•ã‚‰ã«ç²¾åº¦ãŒã‚ã‚‹ã„ã“ã¨ã‹ã‚‰ã€é€£ç¶šã®ãƒ™ã‚¯ãƒˆãƒ«å¤‰åŒ–ã¯æ¤œçŸ¥ã—ãªã„ã€‚
             long dt = new Date().getTime() - changeTime;
             boolean dxx = Math.abs(dx) > thresholdMin && vecx != (dx >= 0);
             boolean dxy = Math.abs(dy) > thresholdMin && vecy != (dy >= 0);
@@ -120,23 +120,23 @@ public class AccelerometerAdapter implements SensorEventListener {
                 vecchangecount++;
                 changeTime = new Date().getTime();
             }
-            // ƒxƒNƒgƒ‹—Ê‚ª‚ ‚éó‘Ô‚ÅŒü‚«‚ª‚Q‰ñiã‰º‰^“®‚Æ‚İ‚È‚·j•Ï‚í‚Á‚½ê‡
-            // ‚Ü‚½‚ÍAƒxƒNƒgƒ‹—Ê‚ªˆê’è’l‚ğ‰º‰ñ‚Á‚½iÃ~‚Æ‚İ‚È‚·jê‡AƒJƒEƒ“ƒg‹–‰Â
+            // ãƒ™ã‚¯ãƒˆãƒ«é‡ãŒã‚ã‚‹çŠ¶æ…‹ã§å‘ããŒï¼’å›ï¼ˆä¸Šä¸‹é‹å‹•ã¨ã¿ãªã™ï¼‰å¤‰ã‚ã£ãŸå ´åˆ
+            // ã¾ãŸã¯ã€ãƒ™ã‚¯ãƒˆãƒ«é‡ãŒä¸€å®šå€¤ã‚’ä¸‹å›ã£ãŸï¼ˆé™æ­¢ã¨ã¿ãªã™ï¼‰å ´åˆã€ã‚«ã‚¦ãƒ³ãƒˆè¨±å¯
             if (vecchangecount > 1 || vectorSize < 1) {
                 counted = false;
                 vecchangecount = 0;
             }
-            // ƒJƒEƒ“ƒg‹–‰Â‚ÅAè‡’l‚ğ’´‚¦‚éƒxƒNƒgƒ‹—Ê‚ª‚ ‚éê‡AƒJƒEƒ“ƒg
+            // ã‚«ã‚¦ãƒ³ãƒˆè¨±å¯ã§ã€é–¾å€¤ã‚’è¶…ãˆã‚‹ãƒ™ã‚¯ãƒˆãƒ«é‡ãŒã‚ã‚‹å ´åˆã€ã‚«ã‚¦ãƒ³ãƒˆ
             if (!counted && vectorSize > threshold) {
                 step_counter++;
                 counted = true;
                 vecchangecount = 0;
             }
-            // ƒJƒEƒ“ƒg©‚Ì‰Á‘¬“x‚ÌŒü‚«‚ğ•Û‘¶
+            // ã‚«ã‚¦ãƒ³ãƒˆè‡ªã®åŠ é€Ÿåº¦ã®å‘ãã‚’ä¿å­˜
             vecx = dx >= 0;
             vecy = dy >= 0;
             vecz = dz >= 0;
-            // ó‘ÔXV
+            // çŠ¶æ…‹æ›´æ–°
             oldVectorSize = vectorSize;
 
             oldx = event.values[0];

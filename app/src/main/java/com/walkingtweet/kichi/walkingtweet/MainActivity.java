@@ -1,21 +1,38 @@
 package com.walkingtweet.kichi.walkingtweet;
 
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import twitter4j.AsyncTwitter;
+import twitter4j.AsyncTwitterFactory;
+import twitter4j.TwitterAdapter;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private final static String TAG = MainActivity.class.getSimpleName();
 
     AccelerometerAdapter ad;
     GraphCounter thread;
-//    private AsyncTwitter mTwitter;
+    private AsyncTwitter mTwitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
 
         thread = new GraphCounter(ad);
         thread.start();
-/*
+
         mTwitter = new AsyncTwitterFactory().getInstance();
         mTwitter.addListener(mListener);
 
@@ -44,19 +61,21 @@ public class MainActivity extends ActionBarActivity {
 
         Button btnTweet = (Button)findViewById(R.id.tweetbutton);
 
-        btnTweet.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View arg0) {
-                String	text1;
-                text1 = String.format("you walked %d steps today.", ad.getStepCounter());
 
-                mTwitter.updateStatus(text1);
+        btnTweet.setOnClickListener(new OnClickListener(){
+            public void onClick(View arg0) {
+                String	tweetString;
+                tweetString = String.format("今日は %d歩 歩きました。", ad.getStepCounter());
+
+                mTwitter.updateStatus(tweetString);
+
                 Toast.makeText(getApplicationContext(),
-                        "you teweet",
+                        "ツイートしました",
                         Toast.LENGTH_SHORT).show();
+
             }
         });
-        */
+
     }
 
 
@@ -67,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
         thread.close();
     }
 
-    // ���M���O�X���b�h
+    // ロギングスレッド
     class GraphCounter extends Thread {
         AccelerometerAdapter ad;
         Handler handler = new Handler();
@@ -136,39 +155,54 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private static final String APIKey =
-            "//\t\t\t\t\"****************\";";
-    //				"****************";
+
+    				"****************";
     private static final String APISecret =
-            "//\t\t\t\t\"****************\";";
-//				"//				"****************";";
+
+				"****************";
 
     private final String PREF_FILE_NAME = "YMOTweetTest";
     private final String PREF_TOKEN = "token";
     private final String PREF_SECRET = "secret";
 
-/*
+
     private RequestToken mReqToken;
     //		private EditText eText;
 //		private Button btnTweet;
     private final TwitterListener mListener = new TwitterListener();
-*/
+
 
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+
+        Log.e(TAG, "intent-------->" + intent.getDataString());
+
+        //ブラウザからのコールバック
         final Uri uri = intent.getData();
-        final String verifier = uri.getQueryParameter("oauth_verifier");
-/*
-        if (verifier != null) {
-            mTwitter.getOAuthAccessTokenAsync(mReqToken, verifier);
+        if (uri != null && uri.toString().startsWith("twittercallback://callback")) {
+            final String verifier = uri.getQueryParameter("oauth_verifier");
+            try {/*
+                AccessToken at = mOauth.getOAuthAccessToken(verifier);
+                mAccessToken = at.getToken();
+                mAccessTokenSecret = at.getTokenSecret();
+                createTwitterInstance();*/
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
+
+            if (verifier != null) {
+                mTwitter.getOAuthAccessTokenAsync(mReqToken, verifier);
+            }
         }
-        */
+
     }
-/*
-    protected class TwitterListener extends TwitterAdapter{
+
+    protected class TwitterListener extends TwitterAdapter {
         @Override
         public void gotOAuthRequestToken(RequestToken token) {
             mReqToken = token;
-
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mReqToken.getAuthorizationURL()));
             startActivity(intent);
         }
@@ -185,8 +219,8 @@ public class MainActivity extends ActionBarActivity {
             mTwitter.setOAuthAccessToken(new AccessToken(token.getToken(), token.getTokenSecret()));
         }
     }
-*/
-    /*
+
+
     public AccessToken getAccessToken() {
 
         SharedPreferences pref = getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -201,7 +235,7 @@ public class MainActivity extends ActionBarActivity {
             return null;
         }
     }
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

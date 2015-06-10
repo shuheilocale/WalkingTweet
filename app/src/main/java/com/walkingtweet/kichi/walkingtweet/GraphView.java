@@ -41,7 +41,7 @@ public class GraphView extends View {
         canvas.drawLine(0, base, width, base, paint);
 
 
-        // グラフを緑色線で表示
+        // 繧ｰ繝ｩ繝輔ｒ邱題牡邱壹〒陦ｨ遉ｺ
         paint.setColor(Color.GREEN);
         paint.setStrokeWidth(4);
         for ( int i = 0; i < counterhistory.length - 1 ; i++ ){
@@ -49,7 +49,7 @@ public class GraphView extends View {
                     base + counterhistory[i + 1], paint);
         }
 
-        // 現在を赤色縦線で表示
+        // 迴ｾ蝨ｨ繧定ｵ､濶ｲ邵ｦ邱壹〒陦ｨ遉ｺ
         paint.setColor(Color.RED);
         canvas.drawLine(counter, 0, counter, height, paint);
 

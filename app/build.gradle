@@ -22,6 +22,18 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'org.twitter4j:twitter4j-core:4.0.3'        // Twitter4J
+    compile 'org.twitter4j:twitter4j-async:4.0.3'
+}
+android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 tasks.withType(JavaCompile) {
